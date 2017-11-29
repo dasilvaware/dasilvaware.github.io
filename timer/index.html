@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="/timer/font-awesome.css" type="text/css" />
+    <link rel="stylesheet" href="/timer/app.css" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <div class="count-down">
+            <span id="minutes"></span>:<span id="seconds"></span>
+        </div>
+        <div class="control">
+            <button id="play"><i class="fa fa-2x fa-play"></i></button>
+            <button id="pause"><i class="fa fa-2x fa-pause"></i></button>
+            <button id="stop"><i class="fa fa-2x fa-stop"></i></button>
+        </div>
+        <div class="time">
+            <button id="hour">60:00</button>
+            <button id="min33">33:33</button>
+            <button id="min30">30:00</button>
+            <button id="min15">15:00</button>
+            <button id="min10">10:00</button>
+            <button id="min5">05:00</button>
+            <button id="min3">03:00</button>
+        </div>
+        <br />
+        <br />
+        <p>
+            Made with <i class="fa fa-heart"></i> in Minnesota
+        </p>
+    </div>
+    <script src="/timer/rx.all.js"></script>
+    <script src="/timer/chime.js"></script>
+    <script src="/timer/app.js"></script>
+    <script type="text/javascript">
+        var app = new Timer.App();
+    </script>
+</body>
+</html>
