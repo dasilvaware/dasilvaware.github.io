@@ -1,6 +1,7 @@
 var Timer;
 (function (Timer) {
     "use strict";
+    var TimeLimit;
     (function (TimeLimit) {
         TimeLimit[TimeLimit["ONE_HOUR"] = 3600] = "ONE_HOUR";
         TimeLimit[TimeLimit["THIRTY_THREE_AND_THIRD"] = 2013] = "THIRTY_THREE_AND_THIRD";
@@ -9,9 +10,10 @@ var Timer;
         TimeLimit[TimeLimit["TEN_MINUTES"] = 600] = "TEN_MINUTES";
         TimeLimit[TimeLimit["FIVE_MINUTES"] = 300] = "FIVE_MINUTES";
         TimeLimit[TimeLimit["THREE_MINUTES"] = 180] = "THREE_MINUTES";
-    })(Timer.TimeLimit || (Timer.TimeLimit = {}));
-    var TimeLimit = Timer.TimeLimit;
-    var App = (function () {
+        TimeLimit[TimeLimit["TWO_MINUTES"] = 120] = "TWO_MINUTES";
+        TimeLimit[TimeLimit["ONE_MINUTE"] = 60] = "ONE_MINUTE";
+    })(TimeLimit = Timer.TimeLimit || (Timer.TimeLimit = {}));
+    var App = /** @class */ (function () {
         function App() {
             var _this = this;
             this.limit = TimeLimit.ONE_HOUR;
@@ -19,43 +21,18 @@ var Timer;
             this.ONE_SECOND_IN_MS = 1000;
             this.chime = new Timer.Chime();
             this._stop();
-            this._click("play").subscribe(function () {
-                _this._play();
-            });
-            this._click("pause").subscribe(function () {
-                _this._pause();
-            });
-            this._click("stop").subscribe(function () {
-                _this._stop();
-            });
-            this._click("hour").subscribe(function () {
-                _this.limit = TimeLimit.ONE_HOUR;
-                _this._stop();
-            });
-            this._click("min33").subscribe(function () {
-                _this.limit = TimeLimit.THIRTY_THREE_AND_THIRD;
-                _this._stop();
-            });
-            this._click("min30").subscribe(function () {
-                _this.limit = TimeLimit.THIRTY_MINUTES;
-                _this._stop();
-            });
-            this._click("min15").subscribe(function () {
-                _this.limit = TimeLimit.FIFTEEN_MINUTES;
-                _this._stop();
-            });
-            this._click("min10").subscribe(function () {
-                _this.limit = TimeLimit.TEN_MINUTES;
-                _this._stop();
-            });
-            this._click("min5").subscribe(function () {
-                _this.limit = TimeLimit.FIVE_MINUTES;
-                _this._stop();
-            });
-            this._click("min3").subscribe(function () {
-                _this.limit = TimeLimit.THREE_MINUTES;
-                _this._stop();
-            });
+            this._click("play").subscribe(function () { return _this._play(); });
+            this._click("pause").subscribe(function () { return _this._pause(); });
+            this._click("stop").subscribe(function () { return _this._stop(); });
+            this._click("hour").subscribe(function () { return _this._limit(TimeLimit.ONE_HOUR); });
+            this._click("min33").subscribe(function () { return _this._limit(TimeLimit.THIRTY_THREE_AND_THIRD); });
+            this._click("min30").subscribe(function () { return _this._limit(TimeLimit.THIRTY_MINUTES); });
+            this._click("min15").subscribe(function () { return _this._limit(TimeLimit.FIFTEEN_MINUTES); });
+            this._click("min10").subscribe(function () { return _this._limit(TimeLimit.TEN_MINUTES); });
+            this._click("min5").subscribe(function () { return _this._limit(TimeLimit.FIVE_MINUTES); });
+            this._click("min3").subscribe(function () { return _this._limit(TimeLimit.THREE_MINUTES); });
+            this._click("min2").subscribe(function () { return _this._limit(TimeLimit.TWO_MINUTES); });
+            this._click("min1").subscribe(function () { return _this._limit(TimeLimit.ONE_MINUTE); });
             Rx.Observable
                 .interval(this.ONE_SECOND_IN_MS)
                 .subscribe(function () {
@@ -105,6 +82,10 @@ var Timer;
         App.prototype._click = function (id) {
             var tag = document.getElementById(id);
             return Rx.Observable.fromEvent(tag, "click");
+        };
+        App.prototype._limit = function (limit) {
+            this.limit = limit;
+            this._stop();
         };
         return App;
     }());

@@ -1,7 +1,7 @@
 var Timer;
 (function (Timer) {
     "use strict";
-    var Chime = (function () {
+    var Chime = /** @class */ (function () {
         function Chime() {
             this.chime = new Audio();
             this.chime.src = "/timer/chime.mp3";
