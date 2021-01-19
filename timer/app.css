@@ -19,10 +19,7 @@
 .count-down {
   font-size: 75pt; }
 
-.control {
-  margin: 2px 0px 0px 2px; }
-
-.time {
+.control, .time, .chime {
   margin: 2px 0px 0px 2px; }
 
 button {
@@ -38,4 +35,3 @@ button {
   border: 1px solid transparent;
   white-space: nowrap;
   border-radius: 5px; }
-

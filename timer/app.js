@@ -56,6 +56,7 @@ var App = (function () {
         this._click("min3").subscribe(function () { return _this._limit(TimeLimit.THREE_MINUTES); });
         this._click("min2").subscribe(function () { return _this._limit(TimeLimit.TWO_MINUTES); });
         this._click("min1").subscribe(function () { return _this._limit(TimeLimit.ONE_MINUTE); });
+        this._click("chimer").subscribe(function () { return _this._chimer(); });
         Rx.Observable
             .interval(this.ONE_SECOND_IN_MS)
             .subscribe(function () { return _this._tick(); });
@@ -107,6 +108,15 @@ var App = (function () {
     App.prototype._limit = function (limit) {
         this.limit = limit;
         this._stop();
+    };
+    App.prototype._chimer = function () {
+        var _this = this;
+        if (this.ChimerTimeout) {
+            clearTimeout(this.ChimerTimeout);
+            this.ChimerTimeout = null;
+        }
+        this.chime.start();
+        this.ChimerTimeout = setTimeout(function () { return _this.chime.stop(); }, 3000);
     };
     return App;
 }());
