@@ -15,7 +15,7 @@ var Chime = (function () {
     function Chime() {
         this.chime = new Audio();
         this.chime.src = "/timer/chime.mp3";
-        this.chime.loop = true;
+        this.chime.loop = false;
         this.chime.autoplay = false;
         this.chime.load();
     }
@@ -110,13 +110,7 @@ var App = (function () {
         this._stop();
     };
     App.prototype._chimer = function () {
-        var _this = this;
-        if (this.ChimerTimeout) {
-            clearTimeout(this.ChimerTimeout);
-            this.ChimerTimeout = null;
-        }
         this.chime.start();
-        this.ChimerTimeout = setTimeout(function () { return _this.chime.stop(); }, 3000);
     };
     return App;
 }());
